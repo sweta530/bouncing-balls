@@ -12,15 +12,15 @@ let mouse = {
 };
 
 function getRandom(min, max) {
-    return Math.round(Math.random() * (max - min + 1) + min);
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 function createBall() {
     const radius = getRandom(10, 30);
     const x = getRandom(radius, canvas.width - radius);
     const y = getRandom(radius, canvas.height - radius);
-    const dx = (Math.random() - 0.5) * 10;
-    const dy = (Math.random() - 0.5) * 10;
+    const dx = (Math.random() - 0.5) * 5;
+    const dy = (Math.random() - 0.5) * 5;
     const color = `rgb(${getRandom(0, 255)}, ${getRandom(0, 255)}, ${getRandom(0, 255)})`;
     balls.push({ x, y, dx, dy, radius, color, resized: false });
 }
@@ -78,3 +78,8 @@ canvas.addEventListener('mousemove', function(event) {
         }
     });
 });
+
+setInterval(() => {
+    balls.shift();
+    createBall();
+}, 1000);
